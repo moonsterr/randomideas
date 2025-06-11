@@ -18,6 +18,7 @@ class postApi {
     const posts = await axios.get(`${this._url}/ideas`, {
       headers: {
         Authorization: `Bearer ${token}`,
+        authorization: `Beaer ${token}`,
         'Content-Type': 'application/json',
       },
     });
