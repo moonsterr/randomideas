@@ -14,6 +14,9 @@ const ideaSchema = new mongoose.Schema({
     ref: 'User', // ← fix here
     required: true,
   },
+  name: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now,

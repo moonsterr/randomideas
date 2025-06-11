@@ -167,7 +167,18 @@ form label {
   font-weight: 600;
   user-select: none;
 }
-
+.tag-select {
+  width: 100%;
+  padding: 0.4rem 0.75rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  border: 1px solid #ccc;
+  appearance: none; /* Remove default arrow */
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
 .tag-technology {
   background: steelblue;
 }

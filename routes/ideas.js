@@ -3,10 +3,16 @@ const router = express.Router();
 const Idea = require('../models/Idea');
 const authenticateToken = require('../middleware/authentication');
 //get all ideas
-router.get('/', async (req, res) => {
+router.get('/', authenticateToken, async (req, res) => {
   try {
     const ideas = await Idea.find();
-    res.status(200).json({ success: true, data: ideas });
+    console.log(req.user);
+    res.status(200).json({
+      success: true,
+      data: ideas,
+      user: req.user.userId,
+      username: req.user.username,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -32,7 +38,7 @@ router.get('/:id', async (req, res) => {
 });
 router.post('/', authenticateToken, async (req, res) => {
   try {
-    const { text, tag } = req.body;
+    const { text, tag, name } = req.body;
     if (!text) {
       return res
         .status(500)
@@ -47,6 +53,7 @@ router.post('/', authenticateToken, async (req, res) => {
       text,
       tag,
       author: req.user.userId,
+      name: req.user.username,
     });
     const savedIdea = await newIdea.save();
     res.status(200).json({ success: true, data: savedIdea });
@@ -56,6 +63,12 @@ router.post('/', authenticateToken, async (req, res) => {
 });
 router.put('/:id', authenticateToken, async (req, res) => {
   try {
+    const idea = await Idea.findById(req.params.id);
+    if (!idea || idea.author.toString() !== req.user.userId) {
+      return res
+        .status(403)
+        .json({ success: false, message: 'Not authorized' });
+    }
     const updatedIdea = await Idea.findByIdAndUpdate(
       req.params.id,
       {
@@ -66,7 +79,6 @@ router.put('/:id', authenticateToken, async (req, res) => {
       },
       { new: true }
     );
-
     res.status(200).json({ success: true, data: updatedIdea });
   } catch (error) {
     res.status(500).json(`something went wrong ${error}`);
@@ -74,12 +86,12 @@ router.put('/:id', authenticateToken, async (req, res) => {
 });
 router.delete('/:id', authenticateToken, async (req, res) => {
   try {
-    const deletedIdea = await Idea.findByIdAndDelete(req.params.id);
+    const idea = await Idea.findById(req.params.id);
 
-    if (!deletedIdea) {
+    if (!idea || idea.author.toString() !== req.user.userId) {
       return res.status(404).json({ message: 'Idea not found' });
     }
-
+    const deletedIdea = await Idea.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: 'Idea deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
