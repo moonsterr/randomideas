@@ -3,7 +3,7 @@ import posts from '../components/post';
 // const postsJs = new posts();
 class postApi {
   constructor() {
-    this._url = 'http://localhost:5000';
+    this._url = '/app';
     this._form = document.getElementById('idea-form');
     this._modalBox = document.getElementById('modal');
     this._ideaContainer = document.getElementById('idea-list');
@@ -15,9 +15,10 @@ class postApi {
   async getPosts() {
     const token = localStorage.getItem('token');
     console.log(token);
-    const posts = await axios.get(`${this._url}/app/ideas`, {
+    const posts = await axios.get(`${this._url}/ideas`, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
     });
     // console.log(posts);
@@ -36,7 +37,7 @@ class postApi {
   async deletePost(id) {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${this._url}/app/ideas/${id}`, {
+      await axios.delete(`${this._url}/ideas/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -54,7 +55,7 @@ class postApi {
     const token = localStorage.getItem('token');
     try {
       const postReq = await axios.post(
-        `${this._url}/app/ideas`,
+        `${this._url}/ideas`,
         {
           text: ideaText,
           tag: selectedTag,
