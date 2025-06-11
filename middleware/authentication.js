@@ -3,7 +3,9 @@ const jwt = require('jsonwebtoken');
 const authenticateToken = (req, res, next) => {
   // Usually token is sent in the Authorization header as: "Bearer <token>"
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // get token part
+  console.log(authHeader);
+  const token = authHeader.split(' ')[1]; // get token part
+  console.log(token);
 
   if (!token) {
     return res.status(502).json({
