@@ -9,7 +9,11 @@ connectDb();
 const app = express();
 app.use(
   cors({
-    origin: ['http://localhost:5000', 'http://localhost:3000'],
+    origin: [
+      'http://localhost:5000',
+      'http://localhost:3000',
+      'https://randomideas-dwa3.onrender.com',
+    ],
     credentials: true,
   })
 );
