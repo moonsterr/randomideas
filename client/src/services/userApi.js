@@ -4,11 +4,11 @@ const jwt = new jwtToken();
 
 class UserApi {
   constructor() {
-    this._url = 'http://localhost:5000';
+    this._url = '/app';
   }
   async create(name, password) {
     try {
-      const accountCreate = await axios.post(`${this._url}/app/users/create`, {
+      const accountCreate = await axios.post(`${this._url}/users/create`, {
         username: name,
         password,
       });
@@ -20,7 +20,7 @@ class UserApi {
   }
   async login(name, password) {
     const accountLogin = await axios.post(
-      `${this._url}/app/users/login`,
+      `${this._url}/users/login`,
       {
         username: name,
         password,

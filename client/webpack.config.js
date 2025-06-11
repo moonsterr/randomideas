@@ -18,6 +18,13 @@ module.exports = {
     hot: true,
     compress: true,
     historyApiFallback: true,
+    proxy: [
+      {
+        context: ['/app'],
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    ],
   },
   module: {
     rules: [

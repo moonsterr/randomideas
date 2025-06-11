@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Random Ideas</title>
   <script defer src="bundle.js"></script><link href="main.css" rel="stylesheet"></head>
   <body>
@@ -14,60 +21,31 @@
       </button>
     </header>
     <div class="container">
-      <div id="idea-list" class="ideas">
-        <div class="card">
-          <button class="delete"><i class="fas fa-times"></i></button>
-          <h3>
-            Positive NewsLetter, a newsletter that only shares positive,
-            uplifting news
-          </h3>
-          <p class="tag tag-technology">TECHNOLOGY</p>
-          <p>
-            Posted on <span class="date">January 1, 2022</span> by
-            <span class="author">Tony Stark</span>
-          </p>
-        </div>
-        <div class="card">
-          <button class="delete"><i class="fas fa-times"></i></button>
-          <h3>
-            Milk cartons that turn a different color the older that your milk is
-            getting
-          </h3>
-          <p class="tag tag-inventions">INVENTIONS</p>
-          <p>
-            Posted on <span class="date">January 2, 2022</span> by
-            <span class="author">Steve Rogers</span>
-          </p>
-        </div>
-        <div class="card">
-          <button class="delete"><i class="fas fa-times"></i></button>
-          <h3>
-            ATM location app which lets you know where the closest ATM is and if
-            it is in service
-          </h3>
-          <p class="tag tag-software">SOFTWARE</p>
-          <p>
-            Posted on <span class="date">January 3, 2022</span> by
-            <span class="author">Bruce Banner</span>
-          </p>
-        </div>
-      </div>
+      <div id="idea-list" class="ideas"></div>
     </div>
 
     <div id="modal" class="modal">
       <div id="form-modal" class="modal-box">
-        <form id="idea-form">
-          <div class="form-control">
+        <form id="idea-form" novalidate>
+          <!-- <div class="form-control">
             <label for="idea-text">Enter a Username</label>
             <input type="text" name="username" id="username" />
-          </div>
+          </div> -->
           <div class="form-control">
             <label for="idea-text">What's Your Idea?</label>
             <textarea name="text" id="idea-text"></textarea>
           </div>
           <div class="form-control">
             <label for="tag">Tag</label>
-            <input type="text" name="tag" id="tag" />
+            <select name="tag" id="tag" class="tag-select">
+              <option value="" disabled selected>Select a tag</option>
+              <option value="education">Education</option>
+              <option value="software">Software</option>
+              <option value="business">Business</option>
+              <option value="technology">Technology</option>
+              <option value="health">Health</option>
+              <option value="inventions">Inventions</option>
+            </select>
           </div>
           <button class="btn" type="submit" id="submit">Submit</button>
         </form>
@@ -91,7 +69,9 @@
           novalidate
         >
           <div class="myapp-error" id="myapp-loginError"></div>
-          <label for="myapp-loginUsername">Username</label>
+          <label class="myapp-loginUsername" for="myapp-loginUsername"
+            >Username</label
+          >
           <input
             type="text"
             id="myapp-loginUsername"
@@ -105,21 +85,23 @@
             name="password"
             required
           />
-          <button type="submit" class="myapp-button">Log In</button>
+          <button type="submit" class="myapp-button myapp-login">Log In</button>
         </form>
 
         <!-- Register Form -->
         <form id="myapp-registerForm" class="myapp-form" novalidate>
           <div class="myapp-error" id="myapp-registerError"></div>
-          <label for="myapp-registerUsername">Username</label>
+          <label class="myapp-registerUsername" for="myapp-registerUsername"
+            >Username</label
+          >
           <input
             type="text"
             id="myapp-registerUsername"
             name="username"
             required
           />
-          <label for="myapp-registerEmail">Email</label>
-          <input type="email" id="myapp-registerEmail" name="email" required />
+          <!-- <label for="myapp-registerEmail">Email</label>
+          <input type="email" id="myapp-registerEmail" name="email" required /> -->
           <label for="myapp-registerPassword">Password</label>
           <input
             type="password"
@@ -127,14 +109,16 @@
             name="password"
             required
           />
-          <label for="myapp-registerConfirmPassword">Confirm Password</label>
+          <!-- <label for="myapp-registerConfirmPassword">Confirm Password</label>
           <input
             type="password"
             id="myapp-registerConfirmPassword"
             name="confirmPassword"
             required
-          />
-          <button type="submit" class="myapp-button">Create Account</button>
+          /> -->
+          <button type="submit" class="myapp-button myapp-create">
+            Create Account
+          </button>
         </form>
       </div>
     </div>
